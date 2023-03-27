@@ -1,0 +1,30 @@
+<span *ngIf="authService.getUser()">
+<p>ODABRATI VRSTU CIPELA ZA IZMENU!</p>
+</span>
+<input [(ngModel)]="vrsta" placeholder="Unesite vrstu cipela" type="text">
+
+<span *ngIf="authService.getUser()">
+
+<input [(ngModel)]="boja" placeholder="boja" type="text">
+<input [(ngModel)]="cena" placeholder="cena" type="text">
+<input [(ngModel)]="slika" placeholder="slika" type="text">
+<input [(ngModel)]="broj" placeholder="broj" type="text">
+</span>
+<button (click)="getByName()">Filter</button>
+<div *ngIf="cipele|async as komad">
+  <ul *ngFor="let k of komad" class="no-bullets">
+    <li>
+      <img src = "{{k.slika}}" style = "border: 5px solid {{k.boja}}">
+      {{k.vrsta}}
+      {{k.cena}}
+      {{k.broj}}
+      <div *ngIf="authService.getUser()">
+      <button (click)="delete(k.id)">Izbrisi</button>
+      <span class="divider"></span>
+      <button (click)="edit(k.id)">Azuriraj</button>
+        </div>
+    </li>
+
+  </ul>
+</div>
+
